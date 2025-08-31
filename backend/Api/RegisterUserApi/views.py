@@ -1,0 +1,26 @@
+from rest_framework.views import APIView
+from rest_framework.response import Response
+from rest_framework import status
+from rest_framework.permissions import AllowAny
+from rest_framework.authtoken.models import Token
+from Logic.serializatorRegister.serializer import RegisterUserSerializer
+from django.utils.decorators import method_decorator
+from django.views.decorators.csrf import csrf_exempt
+
+
+@method_decorator(csrf_exempt, name='dispatch')
+class RegisterUserApi(APIView):
+    permission_classes = [AllowAny]
+
+    def post(self, request):
+        serializer = RegisterUserSerializer(data=request.data)
+        if serializer.is_valid():
+            user, token = serializer.save()
+            return Response({
+                "user_id": user.user_id,
+                "email": user.email,
+                "token": token.key,
+                "message": "Регистрация успешна",
+            }, status=status.HTTP_201_CREATED)
+        else:
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)

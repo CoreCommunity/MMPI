@@ -1,0 +1,32 @@
+@font-face{
+  font-family: Montserrat;
+  src: url('../../fonts/Montserrat/Montserrat.woff2') format('woff2');
+}
+
+.notification {
+  position: fixed;
+  font-family: Montserrat;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(134, 30, 30, 0.848);
+  color: #fff;
+  padding: 10px 20px;
+  border-radius: 0 0 8px 8px;
+  z-index: 1000;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  width: auto;
+  max-width: 90%;
+}
+
+.notification-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.notification p {
+  margin: 0;
+  flex: 1;
+}
+
